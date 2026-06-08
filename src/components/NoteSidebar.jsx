@@ -9,6 +9,14 @@ import NoteArea from "../components/NoteArea";
 export default function NoteSidebar() {
   const [datetime, setDatetime] = useState("Sunday, Jun 7, 2026 at 9:09 PM")
   const [notetextmain, setNotetextmain] = useState("How are you");
+
+  const [activeId, setActiveId] = useState(0)
+
+  const notes = [
+   { id:1, datetime:"Sunday, Jun 7, 2026 at 9:09 PM", notetextmain: "How are you?"},
+   { id:2, datetime:"Saterday, Jun 6, 2026 at 12:00PM", notetextmain: "hello"},
+   { id:3, datetime:"monday, Jun 8, 2026 at 05:00PM", notetextmain: "where are you from?"}
+  ]
   return (
       <div className="flex">
         <div className="border-r-2 border-slate-300 h-screen min-w-md">
@@ -26,22 +34,22 @@ export default function NoteSidebar() {
             </div>
           </div>
           <div>
-            <NoteItem 
-            itembg={`bg-slate-300`} 
-            datetime={"Sunday, Jun 7, 2026 at 9:09 PM"} 
-            notetextmain="How are you"
-            onClick={() => {
-              setNotetextmain("How are you")
-              setDatetime("Sunday, Jun 7, 2026 at 9:09 PM")
-            }} />
-            <NoteItem 
-            itembg={`bg-slate-200`} 
-            datetime={"Saterday, Jun 6, 2026 at 12:00PM"} 
-            notetextmain="Hello"
-            onClick={() => {
-              setNotetextmain("Hello")
-              setDatetime("Saterday, Jun 6, 2026 at 12:00PM")
-            }} />
+            {notes.map((note, index) => {
+              return(
+                <NoteItem 
+                key={index}
+                itembg="bg-slate-300"
+                datetime={note.datetime}
+                notetextmain={note.notetextmain}
+                isActive={activeId === note.id}
+                onClick={() => {
+                  setActiveId(note.id)
+                  setDatetime(note.datetime)
+                  setNotetextmain(note.notetextmain)
+                }}
+              />
+              )
+            })}
           </div>
         </div>
         <NoteArea datetime={datetime} typenote={notetextmain} />
