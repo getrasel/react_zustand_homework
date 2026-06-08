@@ -1,6 +1,6 @@
 import { HiMiniBars3BottomLeft } from "react-icons/hi2";
 
-export default function NoteItem({itembg, datetime, notetextmain, onClick}) {
+export default function NoteItem({itembg, datetime, notetextmain, onClick }) {
   return (
     <div
         onClick={onClick}>
